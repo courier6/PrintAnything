@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<style>
+body{margin:0;background:#eceae4;font-family:Helvetica,Arial,sans-serif}
+:root{--ink-a:#1e3a5f;--ink-b:#1e3a5f;--ink-c:#1e3a5f}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 Helvetica,Arial,sans-serif;color:#1a1a1a}
+.dv-note{font:12px/1.55 Helvetica,Arial,sans-serif;color:rgba(0,0,0,.55);max-width:760px;margin:0 0 22px}
+.dv-opts{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font:400 11.5px/1.3 Helvetica,Arial,sans-serif;color:rgba(0,0,0,.6)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.07);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:26px 0 0;font:12px/1.5 Helvetica,Arial,sans-serif;color:rgba(0,0,0,.5)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Making the job obvious upfront — header riffs on <a class="dv-oid" href="#1a">1a</a> (empty state only)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a">
+  <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Continuation tagline — “PrintAnything, no black ink required.”</div>
+  <div class="dv-card" style="width: 1120px">
+    <div style="display: flex; flex-direction: column; min-height: 620px; background: #ffffff">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 18%, white)">
+        <div style="display: flex; align-items: baseline; gap: 12px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <div style="width: 14px; height: 14px; background: var(--ink-a); align-self: center"></div>
+            <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-a)">PrintAnything</span>
+          </div>
+          <span style="font-size: 17px; font-weight: 400; color: color-mix(in oklab, var(--ink-a) 75%, white); margin-left: -10px">, no black ink required.</span>
+        </div>
+        <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 55%, white)">Works with PDF · PNG · JPG</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; padding: 22px 26px 20px">
+        <div style="flex: 1; border: 2px dashed color-mix(in oklab, var(--ink-a) 38%, white); background: color-mix(in oklab, var(--ink-a) 4%, white); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 56px 40px; min-height: 420px">
+          <div style="width: 54px; height: 68px; background: #ffffff; border: 2px solid var(--ink-a); display: flex; flex-direction: column; gap: 6px; padding: 10px 8px; box-sizing: border-box">
+            <div style="height: 5px; background: var(--ink-a); width: 100%"></div>
+            <div style="height: 5px; background: var(--ink-a); width: 78%"></div>
+            <div style="height: 5px; background: color-mix(in oklab, var(--ink-a) 45%, white); width: 88%"></div>
+            <div style="height: 5px; background: color-mix(in oklab, var(--ink-a) 45%, white); width: 60%"></div>
+          </div>
+          <div style="font-size: 34px; font-weight: 800; color: var(--ink-a); letter-spacing: -0.5px; text-align: center">Drop your PDF or image here</div>
+          <div style="display: flex; align-items: center; gap: 12px">
+            <span style="font-size: 14px; color: color-mix(in oklab, var(--ink-a) 55%, white)">or</span>
+            <button style="background: var(--ink-a); color: #ffffff; border: none; font-size: 15px; font-weight: 700; padding: 12px 24px; cursor: pointer; font-family: inherit">Choose a file</button>
+          </div>
+          <div style="font-size: 15px; color: color-mix(in oklab, var(--ink-a) 65%, white); max-width: 540px; text-align: center; line-height: 1.55">Out of black ink? PrintAnything re-inks your whole document in a dark color your printer can still print — like a blueprint.</div>
+        </div>
+        <div style="display: flex; justify-content: center; padding-top: 14px">
+          <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 50%, white)">Your file never leaves your device — everything happens in your browser.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="2b">
+  <div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Problem-first headline — "Out of black ink?" is the hero</div>
+  <div class="dv-card" style="width: 1120px">
+    <div style="display: flex; flex-direction: column; min-height: 620px; background: #ffffff">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 18%, white)">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <div style="width: 14px; height: 14px; background: var(--ink-a)"></div>
+          <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-a)">PrintAnything</span>
+        </div>
+        <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 55%, white)">Works with PDF · PNG · JPG</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; padding: 22px 26px 20px">
+        <div style="flex: 1; border: 2px dashed color-mix(in oklab, var(--ink-a) 38%, white); background: color-mix(in oklab, var(--ink-a) 4%, white); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 56px 40px; min-height: 420px">
+          <div style="font-size: 40px; font-weight: 800; color: var(--ink-a); letter-spacing: -0.6px; text-align: center; line-height: 1.15">Out of black ink?<br />You can still print this.</div>
+          <div style="font-size: 16px; color: color-mix(in oklab, var(--ink-a) 70%, white); max-width: 560px; text-align: center; line-height: 1.55">Drop your document below — PrintAnything re-inks it in a dark color your printer can still make from its color cartridges.</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 6px">
+            <div style="font-size: 17px; font-weight: 700; color: var(--ink-a)">Drop your PDF or image here</div>
+            <span style="font-size: 14px; color: color-mix(in oklab, var(--ink-a) 55%, white)">or</span>
+            <button style="background: var(--ink-a); color: #ffffff; border: none; font-size: 15px; font-weight: 700; padding: 12px 24px; cursor: pointer; font-family: inherit">Choose a file</button>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; padding-top: 14px">
+          <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 50%, white)">Your file never leaves your device — everything happens in your browser.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dv-opt" id="2c">
+  <div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Continuation tagline + problem-first headline — “PrintAnything — even when the black runs out.”</div>
+  <div class="dv-card" style="width: 1120px">
+    <div style="display: flex; flex-direction: column; min-height: 620px; background: #ffffff">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 18%, white)">
+        <div style="display: flex; align-items: baseline; gap: 12px">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <div style="width: 14px; height: 14px; background: var(--ink-a); align-self: center"></div>
+            <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-a)">PrintAnything</span>
+          </div>
+          <span style="font-size: 17px; font-weight: 400; color: color-mix(in oklab, var(--ink-a) 75%, white); margin-left: -4px"> — even when the black runs out.</span>
+        </div>
+        <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 55%, white)">Works with PDF · PNG · JPG</span>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; padding: 22px 26px 20px">
+        <div style="flex: 1; border: 2px dashed color-mix(in oklab, var(--ink-a) 38%, white); background: color-mix(in oklab, var(--ink-a) 4%, white); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 56px 40px; min-height: 420px">
+          <div style="font-size: 38px; font-weight: 800; color: var(--ink-a); letter-spacing: -0.6px; text-align: center; line-height: 1.15">Out of black ink? Drop your document here.</div>
+          <div style="font-size: 15.5px; color: color-mix(in oklab, var(--ink-a) 70%, white); max-width: 540px; text-align: center; line-height: 1.55">It gets re-inked in a dark color your printer can still print — every page, every photo, still readable.</div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 6px">
+            <button style="background: var(--ink-a); color: #ffffff; border: none; font-size: 15px; font-weight: 700; padding: 12px 24px; cursor: pointer; font-family: inherit">Choose a file</button>
+            <span style="font-size: 13px; color: color-mix(in oklab, var(--ink-a) 55%, white)">PDF, PNG, or JPG</span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; padding-top: 14px">
+          <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 50%, white)">Your file never leaves your device — everything happens in your browser.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "apply <a class="dv-oid" href="#2b">2b</a> to the full <a class="dv-oid" href="#1a">1a</a> flow" · "shorter tagline" · "try a version where the headline names the fix, not the problem"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">PrintAnything — three directions, all states clickable</span></div>
+<p class="dv-note">Each mockup is a 1120px desktop screen. Use the state tabs above each card to flip between Empty → Processing → Preview → Error; in Preview, click Print to see the color-mode reminder, and switch ink swatches (they really re-render). <a class="dv-oid" href="#1a">1a</a> is the brief's full-duotone idea — the whole UI re-inks with the swatch, hold-to-compare. <a class="dv-oid" href="#1b">1b</a> is a technical/blueprint take with a draggable split compare. <a class="dv-oid" href="#1c">1c</a> is a warm paper-and-serif take with side-by-side compare; only the preview re-inks.</p>
+<div class="dv-opts">
+
+<!-- ============ 1a — FULL DUOTONE ============ -->
+<div class="dv-opt" id="1a">
+  <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Full duotone — swatch re-inks the entire UI · press-and-hold compare
+    <sc-for list="{{ tabsA }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.on }}" style="font: 600 10.5px ui-monospace, Menlo, monospace; padding: 4px 9px; border-radius: 4px; border: 1px solid {{ t.bd }}; background: {{ t.bg }}; color: {{ t.fg }}; cursor: pointer">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <div class="dv-card" style="width: 1120px">
+    <div ref="{{ cardARef }}" style="display: flex; flex-direction: column; min-height: 660px; background: #ffffff">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 26px; border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 18%, white)">
+        <div style="display: flex; align-items: center; gap: 10px">
+          <div style="width: 14px; height: 14px; background: var(--ink-a)"></div>
+          <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.3px; color: var(--ink-a)">PrintAnything</span>
+          <span style="font-size: 17px; font-weight: 400; color: color-mix(in oklab, var(--ink-a) 75%, white); margin-left: -4px">&#8201;— even when the black runs out.</span>
+        </div>
+        <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 55%, white)">Works with PDF · PNG · JPG</span>
+      </div>
+
+      <sc-if value="{{ aEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 22px 26px 20px">
+          <div style="flex: 1; border: 2px dashed color-mix(in oklab, var(--ink-a) 38%, white); background: color-mix(in oklab, var(--ink-a) 4%, white); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 56px 40px; min-height: 440px">
+            <div style="font-size: 38px; font-weight: 800; color: var(--ink-a); letter-spacing: -0.6px; text-align: center; line-height: 1.15">Out of black ink? Drop your document here.</div>
+            <div style="font-size: 15.5px; color: color-mix(in oklab, var(--ink-a) 70%, white); max-width: 540px; text-align: center; line-height: 1.55">It gets re-inked in a dark color your printer can still print — every page, every photo, still readable.</div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 6px">
+              <button style="background: var(--ink-a); color: #ffffff; border: none; font-size: 15px; font-weight: 700; padding: 12px 24px; cursor: pointer; font-family: inherit" style-hover="opacity: 0.9">Choose a file</button>
+              <span style="font-size: 13px; color: color-mix(in oklab, var(--ink-a) 55%, white)">PDF, PNG, or JPG</span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center; padding-top: 14px">
+            <span style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 50%, white)">Your file never leaves your device — everything happens in your browser.</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ aProc }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 36px; background: color-mix(in oklab, var(--ink-a) 4%, white)">
+          <div style="font-size: 9px; width: 290px; color: var(--ink-a); box-shadow: 0 10px 30px color-mix(in oklab, var(--ink-a) 18%, transparent)"><dc-import name="DocPage" hint-size="290px,375px"></dc-import></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; width: 340px">
+            <div style="width: 100%; height: 6px; background: color-mix(in oklab, var(--ink-a) 14%, white)"><div style="width: 37.5%; height: 100%; background: var(--ink-a)"></div></div>
+            <div style="font-size: 14.5px; font-weight: 700; color: var(--ink-a)">Recoloring page 3 of 8…</div>
+            <div style="font-size: 12.5px; color: color-mix(in oklab, var(--ink-a) 55%, white); text-align: center">Here's your first page while the rest finish.</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ aPrev }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 26px; border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 18%, white); gap: 16px">
+          <span style="font-size: 13px; color: color-mix(in oklab, var(--ink-a) 60%, white)">permission-slip.pdf · 8 pages</span>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <button style="border: 1px solid color-mix(in oklab, var(--ink-a) 30%, white); background: #ffffff; color: color-mix(in oklab, var(--ink-a) 40%, white); width: 28px; height: 28px; cursor: default; font-size: 14px">‹</button>
+            <span style="font-size: 13px; font-weight: 700; color: var(--ink-a)">Page 1 of 8</span>
+            <button style="border: 1px solid color-mix(in oklab, var(--ink-a) 30%, white); background: #ffffff; color: var(--ink-a); width: 28px; height: 28px; cursor: pointer; font-size: 14px">›</button>
+          </div>
+          <div style="display: flex; gap: 10px">
+            <button style="border: 1.5px solid var(--ink-a); background: #ffffff; color: var(--ink-a); font-size: 14px; font-weight: 700; padding: 9px 18px; cursor: pointer; font-family: inherit">Download PDF</button>
+            <button onClick="{{ printA }}" style="background: var(--ink-a); color: #ffffff; border: none; font-size: 14px; font-weight: 700; padding: 10px 22px; cursor: pointer; font-family: inherit">Print</button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 300px; flex: 1">
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 30px; background: color-mix(in oklab, var(--ink-a) 5%, white)">
+            <sc-if value="{{ remA }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: #ffffff; border: 1.5px solid var(--ink-a); padding: 14px 18px; display: flex; gap: 16px; align-items: center; box-shadow: 0 12px 32px color-mix(in oklab, var(--ink-a) 22%, transparent); width: 470px; box-sizing: border-box; z-index: 3">
+                <div style="font-size: 13.5px; line-height: 1.5; color: var(--ink-a)"><strong>Before you print:</strong> in the print dialog, make sure <strong>Color</strong> is selected — not grayscale or black &amp; white.</div>
+                <button onClick="{{ dismissA }}" style="border: 1px solid var(--ink-a); background: #ffffff; color: var(--ink-a); font-size: 12.5px; font-weight: 700; padding: 7px 12px; cursor: pointer; font-family: inherit; flex: none; white-space: nowrap">Got it</button>
+              </div>
+            </sc-if>
+            <span style="font: 700 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklab, var(--ink-a) 60%, white)">{{ aCompareLabel }}</span>
+            <div style="font-size: 11px; width: 380px; color: {{ aPageColor }}; box-shadow: 0 12px 36px rgba(20,30,50,.15)"><dc-import name="DocPage" hint-size="380px,491px"></dc-import></div>
+            <button onMouseDown="{{ holdStart }}" onMouseUp="{{ holdEnd }}" onMouseLeave="{{ holdEnd }}" onTouchStart="{{ holdStart }}" onTouchEnd="{{ holdEnd }}" style="border: 1px solid color-mix(in oklab, var(--ink-a) 35%, white); background: #ffffff; color: var(--ink-a); font-size: 13px; font-weight: 600; padding: 9px 16px; border-radius: 999px; cursor: pointer; font-family: inherit; user-select: none">Press and hold to see the original</button>
+          </div>
+          <div style="border-left: 1px solid color-mix(in oklab, var(--ink-a) 18%, white); padding: 24px; display: flex; flex-direction: column; gap: 22px">
+            <div>
+              <div style="font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklab, var(--ink-a) 55%, white); margin-bottom: 12px">Ink color</div>
+              <div style="display: flex; gap: 10px; align-items: center">
+                <sc-for list="{{ swA }}" as="s" hint-placeholder-count="4">
+                  <button onClick="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" style="width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer; background: {{ s.hex }}; box-shadow: {{ s.ring }}"></button>
+                </sc-for>
+                <div title="More colors in v2" style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px dashed rgba(0,0,0,.25)"></div>
+              </div>
+              <div style="font-size: 12.5px; color: var(--ink-a); margin-top: 10px; font-weight: 700">{{ inkNameA }}</div>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.55; color: color-mix(in oklab, var(--ink-a) 60%, white)">Colored content becomes one ink — a red line and a green line of the same darkness will look the same.</div>
+            <div style="border-top: 1px solid color-mix(in oklab, var(--ink-a) 18%, white); padding-top: 18px">
+              <div style="font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: 0.1em; text-transform: uppercase; color: color-mix(in oklab, var(--ink-a) 55%, white); margin-bottom: 8px">If it still won't print</div>
+              <details open style="border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 14%, white); padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 700; color: var(--ink-a); cursor: pointer">HP</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: color-mix(in oklab, var(--ink-a) 65%, white); padding-top: 6px">HP printers may block printing when any cartridge reads empty. In the HP Smart app, set the black cartridge to “ignore,” or look for ink backup mode.</div>
+              </details>
+              <details style="border-bottom: 1px solid color-mix(in oklab, var(--ink-a) 14%, white); padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 700; color: var(--ink-a); cursor: pointer">Epson</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: color-mix(in oklab, var(--ink-a) 65%, white); padding-top: 6px">Press and hold Stop/Cancel while the ink light is on to print in backup mode (varies by model).</div>
+              </details>
+              <details style="padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 700; color: var(--ink-a); cursor: pointer">Canon</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: color-mix(in oklab, var(--ink-a) 65%, white); padding-top: 6px">Press and hold Stop for 5+ seconds to disable the ink level check.</div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ aErr }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 22px 26px 20px">
+          <div style="flex: 1; border: 2px dashed color-mix(in oklab, var(--ink-a) 38%, white); background: color-mix(in oklab, var(--ink-a) 4%, white); display: flex; align-items: center; justify-content: center; padding: 56px 40px; min-height: 440px">
+            <div style="background: #ffffff; border: 2px solid var(--ink-a); padding: 28px 32px; max-width: 440px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 12px 32px color-mix(in oklab, var(--ink-a) 20%, transparent)">
+              <div style="font-size: 19px; font-weight: 800; color: var(--ink-a)">This file type isn't supported yet.</div>
+              <div style="font-size: 14px; line-height: 1.5; color: color-mix(in oklab, var(--ink-a) 65%, white)">PrintAnything works with PDF, PNG, and JPG.</div>
+              <div style="margin-top: 8px"><button style="background: var(--ink-a); color: #ffffff; border: none; font-size: 14px; font-weight: 700; padding: 11px 20px; cursor: pointer; font-family: inherit">Choose a different file</button></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 1b — BLUEPRINT / TECHNICAL ============ -->
+<div class="dv-opt" id="1b">
+  <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Blueprint / technical — mono accents, numbered steps · draggable split compare
+    <sc-for list="{{ tabsB }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.on }}" style="font: 600 10.5px ui-monospace, Menlo, monospace; padding: 4px 9px; border-radius: 4px; border: 1px solid {{ t.bd }}; background: {{ t.bg }}; color: {{ t.fg }}; cursor: pointer">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <div class="dv-card" style="width: 1120px">
+    <div ref="{{ cardBRef }}" style="display: flex; flex-direction: column; min-height: 660px; background: #ffffff; color: #182430">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 26px; border-bottom: 1.5px solid #182430">
+        <div style="display: flex; align-items: baseline; gap: 12px">
+          <span style="font: 800 17px ui-monospace, Menlo, monospace; letter-spacing: 0.14em">PRINTANYTHING</span>
+          <span style="font: 400 11px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; color: rgba(24,36,48,.55)">SUBSTITUTE-INK PRINTING</span>
+        </div>
+        <div style="display: flex; gap: 14px; font: 600 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.08em">
+          <span style="color: {{ bStep1 }}">01 DROP</span><span style="color: rgba(24,36,48,.3)">—</span><span style="color: {{ bStep2 }}">02 PREVIEW</span><span style="color: rgba(24,36,48,.3)">—</span><span style="color: {{ bStep3 }}">03 PRINT</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ bEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 20px 26px">
+          <div style="flex: 1; border: 1.5px solid #182430; background-color: #fbfcfd; background-image: linear-gradient(rgba(24,36,48,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(24,36,48,.06) 1px, transparent 1px); background-size: 24px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 56px 40px; min-height: 452px">
+            <div style="font: 600 11px ui-monospace, Menlo, monospace; letter-spacing: 0.14em; color: rgba(24,36,48,.55); border: 1px solid rgba(24,36,48,.3); padding: 5px 10px; background: #ffffff">FIG. 1 — YOUR DOCUMENT, RE-INKED</div>
+            <div style="font-size: 32px; font-weight: 800; letter-spacing: -0.4px; text-align: center">Drop your PDF or image here</div>
+            <div style="font-size: 14.5px; line-height: 1.55; color: rgba(24,36,48,.65); max-width: 520px; text-align: center">Black cartridge empty? Your printer can still mix cyan, magenta, and yellow into a dark, readable ink. We re-print your whole document in one of them.</div>
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="font: 400 12px ui-monospace, Menlo, monospace; color: rgba(24,36,48,.5)">or</span>
+              <button style="background: #182430; color: #ffffff; border: none; font: 700 13px ui-monospace, Menlo, monospace; letter-spacing: 0.1em; padding: 13px 24px; cursor: pointer" style-hover="opacity: 0.9">CHOOSE A FILE</button>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding-top: 12px; font: 400 11px ui-monospace, Menlo, monospace; letter-spacing: 0.05em; color: rgba(24,36,48,.5)">
+            <span>PDF / PNG / JPG</span>
+            <span>FILES NEVER LEAVE YOUR DEVICE</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bProc }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 36px; background-image: linear-gradient(rgba(24,36,48,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(24,36,48,.05) 1px, transparent 1px); background-size: 24px 24px">
+          <div style="font-size: 9px; width: 290px; color: var(--ink-b); border: 1px solid rgba(24,36,48,.2); box-shadow: 0 10px 30px rgba(24,36,48,.12)"><dc-import name="DocPage" hint-size="290px,375px"></dc-import></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+            <div style="display: flex; gap: 5px">
+              <div style="width: 26px; height: 12px; background: var(--ink-b)"></div>
+              <div style="width: 26px; height: 12px; background: var(--ink-b)"></div>
+              <div style="width: 26px; height: 12px; background: var(--ink-b)"></div>
+              <div style="width: 26px; height: 12px; border: 1px solid rgba(24,36,48,.3); box-sizing: border-box"></div>
+              <div style="width: 26px; height: 12px; border: 1px solid rgba(24,36,48,.3); box-sizing: border-box"></div>
+              <div style="width: 26px; height: 12px; border: 1px solid rgba(24,36,48,.3); box-sizing: border-box"></div>
+              <div style="width: 26px; height: 12px; border: 1px solid rgba(24,36,48,.3); box-sizing: border-box"></div>
+              <div style="width: 26px; height: 12px; border: 1px solid rgba(24,36,48,.3); box-sizing: border-box"></div>
+            </div>
+            <div style="font: 700 13px ui-monospace, Menlo, monospace; letter-spacing: 0.08em">RECOLORING PAGE 3 OF 8…</div>
+            <div style="font: 400 11.5px ui-monospace, Menlo, monospace; color: rgba(24,36,48,.55)">PAGE 1 READY — SHOWN ABOVE</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bPrev }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 26px; border-bottom: 1px solid rgba(24,36,48,.18); gap: 16px">
+          <span style="font: 400 12px ui-monospace, Menlo, monospace; color: rgba(24,36,48,.6)">permission-slip.pdf · 8 PAGES</span>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <button style="border: 1px solid rgba(24,36,48,.3); background: #ffffff; color: rgba(24,36,48,.35); width: 28px; height: 28px; cursor: default; font-size: 14px">‹</button>
+            <span style="font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: 0.05em">PAGE 1 / 8</span>
+            <button style="border: 1px solid rgba(24,36,48,.3); background: #ffffff; color: #182430; width: 28px; height: 28px; cursor: pointer; font-size: 14px">›</button>
+          </div>
+          <div style="display: flex; gap: 10px">
+            <button style="border: 1.5px solid #182430; background: #ffffff; color: #182430; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; padding: 10px 16px; cursor: pointer">DOWNLOAD PDF</button>
+            <button onClick="{{ printB }}" style="background: #182430; color: #ffffff; border: none; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; padding: 11px 22px; cursor: pointer">PRINT</button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 300px; flex: 1">
+          <div style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 30px; background-image: linear-gradient(rgba(24,36,48,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(24,36,48,.05) 1px, transparent 1px); background-size: 24px 24px">
+            <sc-if value="{{ remB }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: #ffffff; border: 1.5px solid #182430; padding: 14px 18px; display: flex; gap: 16px; align-items: center; box-shadow: 0 12px 32px rgba(24,36,48,.2); width: 480px; box-sizing: border-box; z-index: 3">
+                <div style="font-size: 13.5px; line-height: 1.5"><strong style="font-family: ui-monospace, Menlo, monospace; letter-spacing: 0.06em">CHECK:</strong> in the print dialog, make sure <strong>Color</strong> is selected — not grayscale or black &amp; white.</div>
+                <button onClick="{{ dismissB }}" style="border: 1px solid #182430; background: #ffffff; color: #182430; font: 700 11px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; padding: 8px 12px; cursor: pointer; flex: none">GOT IT</button>
+              </div>
+            </sc-if>
+            <div style="display: flex; justify-content: space-between; width: 380px; font: 700 10px ui-monospace, Menlo, monospace; letter-spacing: 0.12em; color: rgba(24,36,48,.55)">
+              <span style="color: var(--ink-b)">◀ RE-INKED</span><span>ORIGINAL ▶</span>
+            </div>
+            <div style="position: relative; width: 380px">
+              <div style="font-size: 11px; color: #1c1c1c"><dc-import name="DocPage" hint-size="380px,491px"></dc-import></div>
+              <div style="position: absolute; inset: 0; font-size: 11px; color: var(--ink-b); clip-path: {{ bClip }}"><dc-import name="DocPage" hint-size="380px,491px"></dc-import></div>
+              <div style="position: absolute; top: 0; bottom: 0; left: {{ bHandleLeft }}; width: 2px; background: #182430; z-index: 2"></div>
+            </div>
+            <input type="range" min="0" max="100" value="{{ splitB }}" onInput="{{ onSplit }}" aria-label="Compare re-inked and original" style="width: 380px; accent-color: var(--ink-b)" />
+            <span style="font: 400 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; color: rgba(24,36,48,.5)">DRAG TO COMPARE</span>
+          </div>
+          <div style="border-left: 1px solid rgba(24,36,48,.18); padding: 24px; display: flex; flex-direction: column; gap: 22px">
+            <div>
+              <div style="font: 700 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.12em; color: rgba(24,36,48,.55); margin-bottom: 12px">INK COLOR</div>
+              <div style="display: flex; gap: 10px; align-items: center">
+                <sc-for list="{{ swB }}" as="s" hint-placeholder-count="4">
+                  <button onClick="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" style="width: 24px; height: 24px; border: none; cursor: pointer; background: {{ s.hex }}; box-shadow: {{ s.ring }}"></button>
+                </sc-for>
+                <div title="More colors in v2" style="width: 22px; height: 22px; border: 1.5px dashed rgba(24,36,48,.3)"></div>
+              </div>
+              <div style="font: 700 11.5px ui-monospace, Menlo, monospace; letter-spacing: 0.06em; margin-top: 10px; color: var(--ink-b)">{{ inkNameBUpper }}</div>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.55; color: rgba(24,36,48,.65)">Colored content becomes one ink — a red line and a green line of the same darkness will look the same.</div>
+            <div style="border-top: 1px solid rgba(24,36,48,.18); padding-top: 18px">
+              <div style="font: 700 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.12em; color: rgba(24,36,48,.55); margin-bottom: 8px">IF IT STILL WON'T PRINT</div>
+              <details open style="border-bottom: 1px solid rgba(24,36,48,.12); padding: 8px 0">
+                <summary style="font: 700 12px ui-monospace, Menlo, monospace; cursor: pointer">HP</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: rgba(24,36,48,.65); padding-top: 6px">HP printers may block printing when any cartridge reads empty. In the HP Smart app, set the black cartridge to “ignore,” or look for ink backup mode.</div>
+              </details>
+              <details style="border-bottom: 1px solid rgba(24,36,48,.12); padding: 8px 0">
+                <summary style="font: 700 12px ui-monospace, Menlo, monospace; cursor: pointer">EPSON</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: rgba(24,36,48,.65); padding-top: 6px">Press and hold Stop/Cancel while the ink light is on to print in backup mode (varies by model).</div>
+              </details>
+              <details style="padding: 8px 0">
+                <summary style="font: 700 12px ui-monospace, Menlo, monospace; cursor: pointer">CANON</summary>
+                <div style="font-size: 12.5px; line-height: 1.5; color: rgba(24,36,48,.65); padding-top: 6px">Press and hold Stop for 5+ seconds to disable the ink level check.</div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ bErr }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 20px 26px">
+          <div style="flex: 1; border: 1.5px solid #182430; background-image: linear-gradient(rgba(24,36,48,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(24,36,48,.06) 1px, transparent 1px); background-size: 24px 24px; display: flex; align-items: center; justify-content: center; padding: 56px 40px; min-height: 452px">
+            <div style="background: #ffffff; border: 1.5px solid #182430; padding: 26px 30px; max-width: 440px; display: flex; flex-direction: column; gap: 10px; box-shadow: 8px 8px 0 rgba(24,36,48,.12)">
+              <div style="font: 700 10.5px ui-monospace, Menlo, monospace; letter-spacing: 0.12em; color: rgba(24,36,48,.55)">ERR — UNSUPPORTED FORMAT</div>
+              <div style="font-size: 19px; font-weight: 800">This file type isn't supported yet.</div>
+              <div style="font-size: 14px; line-height: 1.5; color: rgba(24,36,48,.65)">PrintAnything works with PDF, PNG, and JPG.</div>
+              <div style="margin-top: 8px"><button style="background: #182430; color: #ffffff; border: none; font: 700 12px ui-monospace, Menlo, monospace; letter-spacing: 0.08em; padding: 12px 18px; cursor: pointer">CHOOSE A DIFFERENT FILE</button></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 1c — PAPER & SERIF ============ -->
+<div class="dv-opt" id="1c">
+  <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Paper &amp; serif — warm, calm; only the preview re-inks · side-by-side compare
+    <sc-for list="{{ tabsC }}" as="t" hint-placeholder-count="4">
+      <button onClick="{{ t.on }}" style="font: 600 10.5px ui-monospace, Menlo, monospace; padding: 4px 9px; border-radius: 4px; border: 1px solid {{ t.bd }}; background: {{ t.bg }}; color: {{ t.fg }}; cursor: pointer">{{ t.label }}</button>
+    </sc-for>
+  </div>
+  <div class="dv-card" style="width: 1120px">
+    <div ref="{{ cardCRef }}" style="display: flex; flex-direction: column; min-height: 660px; background: #faf7f1; color: #2b2723">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; padding: 20px 30px; border-bottom: 1px solid #e2dbcd">
+        <div style="display: flex; align-items: baseline; gap: 12px">
+          <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.2px">PrintAnything</span>
+          <span style="font-size: 12.5px; color: #8a8172">Print without black ink.</span>
+        </div>
+        <span style="font-size: 12px; color: #8a8172">No sign-up · Nothing uploaded</span>
+      </div>
+
+      <sc-if value="{{ cEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 24px 30px">
+          <div style="flex: 1; border: 1px solid #d8d0c0; background: #fdfcf9; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 56px 40px; min-height: 440px">
+            <div style="font-family: Georgia, 'Times New Roman', serif; font-size: 38px; letter-spacing: -0.3px; text-align: center; max-width: 560px; line-height: 1.2">Drop your PDF or image here</div>
+            <div style="font-size: 15px; line-height: 1.6; color: #6d6555; max-width: 520px; text-align: center">Your printer can still make a dark, readable ink from its color cartridges. PrintAnything re-inks your whole document in one — every page, every photo.</div>
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="font-size: 13.5px; color: #8a8172; font-style: italic; font-family: Georgia, serif">or</span>
+              <button style="background: #2b2723; color: #faf7f1; border: none; font-size: 14.5px; font-weight: 600; padding: 12px 24px; border-radius: 3px; cursor: pointer; font-family: inherit" style-hover="opacity: 0.9">Choose a file</button>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: center; padding-top: 14px">
+            <span style="font-size: 12.5px; color: #8a8172; font-style: italic; font-family: Georgia, serif">Your file never leaves your device.</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ cProc }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 36px">
+          <div style="font-size: 9px; width: 290px; color: var(--ink-c); box-shadow: 0 10px 30px rgba(60,50,30,.15)"><dc-import name="DocPage" hint-size="290px,375px"></dc-import></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; width: 340px">
+            <div style="width: 100%; height: 5px; background: #e2dbcd; border-radius: 999px; overflow: hidden"><div style="width: 37.5%; height: 100%; background: var(--ink-c)"></div></div>
+            <div style="font-family: Georgia, serif; font-size: 16px">Recoloring page 3 of 8…</div>
+            <div style="font-size: 12.5px; color: #8a8172">Here's your first page while the rest finish.</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ cPrev }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 13px 30px; border-bottom: 1px solid #e2dbcd; gap: 16px">
+          <span style="font-size: 13px; color: #8a8172">permission-slip.pdf · 8 pages</span>
+          <div style="display: flex; align-items: center; gap: 10px">
+            <button style="border: 1px solid #d8d0c0; background: #fdfcf9; color: #c0b7a4; width: 28px; height: 28px; border-radius: 3px; cursor: default; font-size: 14px">‹</button>
+            <span style="font-size: 13px; font-weight: 600">Page 1 of 8</span>
+            <button style="border: 1px solid #d8d0c0; background: #fdfcf9; color: #2b2723; width: 28px; height: 28px; border-radius: 3px; cursor: pointer; font-size: 14px">›</button>
+          </div>
+          <div style="display: flex; gap: 10px">
+            <button style="border: 1px solid #2b2723; background: transparent; color: #2b2723; font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 3px; cursor: pointer; font-family: inherit">Download PDF</button>
+            <button onClick="{{ printC }}" style="background: #2b2723; color: #faf7f1; border: none; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 3px; cursor: pointer; font-family: inherit">Print</button>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 290px; flex: 1">
+          <div style="position: relative; display: flex; align-items: center; justify-content: center; gap: 28px; padding: 30px">
+            <sc-if value="{{ remC }}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: #fdfcf9; border: 1px solid #2b2723; border-radius: 3px; padding: 14px 18px; display: flex; gap: 16px; align-items: center; box-shadow: 0 12px 32px rgba(60,50,30,.2); width: 470px; box-sizing: border-box; z-index: 3">
+                <div style="font-size: 13.5px; line-height: 1.5"><strong>Before you print:</strong> in the print dialog, make sure <strong>Color</strong> is selected — not grayscale or black &amp; white.</div>
+                <button onClick="{{ dismissC }}" style="border: 1px solid #2b2723; background: transparent; color: #2b2723; font-size: 12.5px; font-weight: 600; padding: 7px 12px; border-radius: 3px; cursor: pointer; font-family: inherit; flex: none; white-space: nowrap">Got it</button>
+              </div>
+            </sc-if>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+              <div style="font-size: 8.6px; width: 300px; color: #1c1c1c; box-shadow: 0 8px 26px rgba(60,50,30,.14)"><dc-import name="DocPage" hint-size="300px,388px"></dc-import></div>
+              <span style="font-family: Georgia, serif; font-style: italic; font-size: 13px; color: #8a8172">Original</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+              <div style="font-size: 8.6px; width: 300px; color: var(--ink-c); box-shadow: 0 8px 26px rgba(60,50,30,.14); outline: 2px solid var(--ink-c); outline-offset: 3px"><dc-import name="DocPage" hint-size="300px,388px"></dc-import></div>
+              <span style="font-family: Georgia, serif; font-style: italic; font-size: 13px; color: var(--ink-c)">Re-inked — what will print</span>
+            </div>
+          </div>
+          <div style="border-left: 1px solid #e2dbcd; padding: 24px; display: flex; flex-direction: column; gap: 22px; background: #fdfcf9">
+            <div>
+              <div style="font-family: Georgia, serif; font-size: 15px; margin-bottom: 12px">Ink color</div>
+              <div style="display: flex; gap: 10px; align-items: center">
+                <sc-for list="{{ swC }}" as="s" hint-placeholder-count="4">
+                  <button onClick="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" style="width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer; background: {{ s.hex }}; box-shadow: {{ s.ring }}"></button>
+                </sc-for>
+                <div title="More colors in v2" style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px dashed #c0b7a4"></div>
+              </div>
+              <div style="font-size: 12.5px; margin-top: 10px; font-weight: 600; color: var(--ink-c)">{{ inkNameC }}</div>
+            </div>
+            <div style="font-size: 12.5px; line-height: 1.6; color: #6d6555">Colored content becomes one ink — a red line and a green line of the same darkness will look the same.</div>
+            <div style="border-top: 1px solid #e2dbcd; padding-top: 18px">
+              <div style="font-family: Georgia, serif; font-size: 15px; margin-bottom: 8px">If it still won't print</div>
+              <details open style="border-bottom: 1px solid #eee7d9; padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 600; cursor: pointer">HP</summary>
+                <div style="font-size: 12.5px; line-height: 1.55; color: #6d6555; padding-top: 6px">HP printers may block printing when any cartridge reads empty. In the HP Smart app, set the black cartridge to “ignore,” or look for ink backup mode.</div>
+              </details>
+              <details style="border-bottom: 1px solid #eee7d9; padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 600; cursor: pointer">Epson</summary>
+                <div style="font-size: 12.5px; line-height: 1.55; color: #6d6555; padding-top: 6px">Press and hold Stop/Cancel while the ink light is on to print in backup mode (varies by model).</div>
+              </details>
+              <details style="padding: 8px 0">
+                <summary style="font-size: 13px; font-weight: 600; cursor: pointer">Canon</summary>
+                <div style="font-size: 12.5px; line-height: 1.55; color: #6d6555; padding-top: 6px">Press and hold Stop for 5+ seconds to disable the ink level check.</div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ cErr }}" hint-placeholder-val="{{ false }}">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 24px 30px">
+          <div style="flex: 1; border: 1px solid #d8d0c0; background: #fdfcf9; border-radius: 3px; display: flex; align-items: center; justify-content: center; padding: 56px 40px; min-height: 440px">
+            <div style="background: #ffffff; border: 1px solid #2b2723; border-radius: 3px; padding: 28px 32px; max-width: 440px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 12px 32px rgba(60,50,30,.16)">
+              <div style="font-family: Georgia, serif; font-size: 20px">This file type isn't supported yet.</div>
+              <div style="font-size: 14px; line-height: 1.55; color: #6d6555">PrintAnything works with PDF, PNG, and JPG.</div>
+              <div style="margin-top: 8px"><button style="background: #2b2723; color: #faf7f1; border: none; font-size: 14px; font-weight: 600; padding: 11px 20px; border-radius: 3px; cursor: pointer; font-family: inherit">Choose a different file</button></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "commit to <a class="dv-oid" href="#1a">1a</a> and add the mobile layout" · "put the split compare from <a class="dv-oid" href="#1b">1b</a> into <a class="dv-oid" href="#1a">1a</a>" · "warmer navy, bigger preview" · "new directions"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const INKS = [
+  { name: 'Dark navy', hex: '#1e3a5f' },
+  { name: 'Dark teal', hex: '#0f4c47' },
+  { name: 'Dark maroon', hex: '#5e1f2e' },
+  { name: 'Dark purple', hex: '#44286b' }
+];
+const STATES = ['Empty', 'Processing', 'Preview', 'Error'];
+
+class Component extends DCLogic {
+  state = {
+    sA: 'empty', sB: 'empty', sC: 'empty',
+    inkA: 0, inkB: 0, inkC: 0,
+    holdA: false, remA: false, remB: false, remC: false,
+    splitB: 55
+  };
+
+  cardA = React.createRef();
+  cardB = React.createRef();
+  cardC = React.createRef();
+
+  componentDidMount() { this.syncInks(); }
+  componentDidUpdate() { this.syncInks(); }
+
+  syncInks() {
+    const pairs = [
+      [this.cardA, '--ink-a', INKS[this.state.inkA].hex],
+      [this.cardB, '--ink-b', INKS[this.state.inkB].hex],
+      [this.cardC, '--ink-c', INKS[this.state.inkC].hex]
+    ];
+    pairs.forEach(([ref, name, hex]) => {
+      if (ref.current) ref.current.style.setProperty(name, hex);
+    });
+  }
+
+  tabs(K) {
+    const cur = this.state['s' + K];
+    return STATES.map((label) => {
+      const v = label.toLowerCase();
+      const active = cur === v;
+      return {
+        label,
+        on: () => this.setState({ ['s' + K]: v }),
+        bg: active ? '#1a1a1a' : '#ffffff',
+        fg: active ? '#ffffff' : '#666666',
+        bd: active ? '#1a1a1a' : 'rgba(0,0,0,.18)'
+      };
+    });
+  }
+
+  swatches(K, square) {
+    const sel = this.state['ink' + K];
+    return INKS.map((ink, i) => ({
+      hex: ink.hex,
+      name: ink.name,
+      on: () => this.setState({ ['ink' + K]: i }),
+      ring: i === sel
+        ? '0 0 0 2px #ffffff, 0 0 0 4px ' + ink.hex
+        : '0 0 0 1px rgba(0,0,0,.15)'
+    }));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const is = (K, v) => s['s' + K] === v;
+    return {
+      cardARef: this.cardA, cardBRef: this.cardB, cardCRef: this.cardC,
+      tabsA: this.tabs('A'), tabsB: this.tabs('B'), tabsC: this.tabs('C'),
+      swA: this.swatches('A'), swB: this.swatches('B', true), swC: this.swatches('C'),
+      inkNameA: INKS[s.inkA].name,
+      inkNameBUpper: INKS[s.inkB].name.toUpperCase(),
+      inkNameC: INKS[s.inkC].name,
+
+      aEmpty: is('A', 'empty'), aProc: is('A', 'processing'), aPrev: is('A', 'preview'), aErr: is('A', 'error'),
+      bEmpty: is('B', 'empty'), bProc: is('B', 'processing'), bPrev: is('B', 'preview'), bErr: is('B', 'error'),
+      cEmpty: is('C', 'empty'), cProc: is('C', 'processing'), cPrev: is('C', 'preview'), cErr: is('C', 'error'),
+
+      bStep1: is('B', 'empty') || is('B', 'error') ? '#182430' : 'rgba(24,36,48,.35)',
+      bStep2: is('B', 'processing') || is('B', 'preview') ? '#182430' : 'rgba(24,36,48,.35)',
+      bStep3: s.remB ? '#182430' : 'rgba(24,36,48,.35)',
+
+      holdStart: () => this.setState({ holdA: true }),
+      holdEnd: () => this.setState({ holdA: false }),
+      aPageColor: s.holdA ? '#1c1c1c' : 'var(--ink-a)',
+      aCompareLabel: s.holdA ? 'Original — black ink' : 'Re-inked preview — what will print',
+
+      printA: () => this.setState({ remA: true }),
+      dismissA: () => this.setState({ remA: false }),
+      remA: s.remA,
+      printB: () => this.setState({ remB: true }),
+      dismissB: () => this.setState({ remB: false }),
+      remB: s.remB,
+      printC: () => this.setState({ remC: true }),
+      dismissC: () => this.setState({ remC: false }),
+      remC: s.remC,
+
+      splitB: s.splitB,
+      onSplit: (e) => this.setState({ splitB: Number(e.target.value) }),
+      bClip: 'inset(0 ' + (100 - s.splitB) + '% 0 0)',
+      bHandleLeft: 'calc(' + s.splitB + '% - 1px)'
+    };
+  }
+}
+</script>
+</body>
+</html>
