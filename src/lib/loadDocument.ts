@@ -29,9 +29,20 @@ export async function loadDocument(file: File): Promise<SourceDocument> {
   const isPdf = file.type === 'application/pdf' || name.endsWith('.pdf');
   const isImage =
     file.type === 'image/png' || file.type === 'image/jpeg' || /\.(png|jpe?g)$/.test(name);
+  const isHeic =
+    file.type === 'image/heic' || file.type === 'image/heif' || /\.hei[cf]$/.test(name);
   if (isPdf) return loadPdf(file);
+  if (isHeic) return loadImage(await decodeHeic(file));
   if (isImage) return loadImage(file);
   throw new UnsupportedFileError();
+}
+
+// Browsers (Safari aside) can't decode HEIC natively; the decoder is imported
+// only when a HEIC file actually arrives so the common path stays light.
+async function decodeHeic(file: File): Promise<Blob> {
+  const heic2any = (await import('heic2any')).default;
+  const result = await heic2any({ blob: file, toType: 'image/png' });
+  return Array.isArray(result) ? result[0] : result;
 }
 
 async function loadPdf(file: File): Promise<SourceDocument> {
@@ -57,7 +68,7 @@ async function loadPdf(file: File): Promise<SourceDocument> {
   };
 }
 
-async function loadImage(file: File): Promise<SourceDocument> {
+async function loadImage(file: Blob): Promise<SourceDocument> {
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, MAX_IMAGE_DIM / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement('canvas');

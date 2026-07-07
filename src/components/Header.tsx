@@ -7,7 +7,7 @@ export function Header() {
         {/*   = thin space; the tagline reads as a continuation of the wordmark */}
         <span className="tagline">{' '}&mdash; even when the black runs out.</span>
       </div>
-      <span className="header-formats">Works with PDF · PNG · JPG</span>
+      <span className="header-formats">Works with PDF · PNG · JPG · HEIC</span>
     </header>
   );
 }

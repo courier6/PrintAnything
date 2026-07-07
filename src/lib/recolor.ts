@@ -1,9 +1,18 @@
-// Duotone recoloring, ported from design_handoff_printanything/recolor-reference.js.
-// Per-pixel luminance drives a white→ink ramp; near-white clamps to pure paper
-// white so scanned documents don't print a faint tint wash.
+// Duotone recoloring, from design_handoff_printanything-new/recolor-reference.js,
+// with the §4 darkness fix: sRGB-space mixing, a shadow clamp, and a contrast
+// curve (constants below). Per-pixel luminance drives a white→ink ramp;
+// near-white clamps to pure paper white so scanned documents don't print a
+// faint tint wash, near-black clamps to full ink so photo shadows don't wash out.
 
 const WHITE_CLAMP = 0.94;
-const GAMMA = 2.2;
+// Shadows at or below this luminance saturate to full ink. Photo blacks rarely
+// reach luma 0; without this they'd land mid-ramp and print as a pale tint.
+const BLACK_CLAMP = 0.1;
+// Contrast curve on ink strength (design handoff round 2, §4 candidate a).
+// Together with the clamps this makes output luma track SOURCE luma nearly 1:1
+// through the midtones — "same darkness, different hue" — instead of
+// proportionally compressing everything into the lighter [ink luma, white] range.
+const CONTRAST = 0.75;
 
 /** One-time pass per page: 8-bit relative luminance for every pixel. */
 export function luminanceMap(canvas: HTMLCanvasElement): Uint8Array {
@@ -23,11 +32,11 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
   return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 
-// Gamma-aware lerp keeps mid-grays from looking washed out.
+// Plain sRGB lerp — luma is linear in sRGB channels, so output darkness is a
+// direct function of t. A gamma-2.2 linear-space mix here rendered midtones
+// (and anti-aliased text) far too light (design handoff round 2, §4).
 function mix(from: number, to: number, t: number): number {
-  return Math.round(
-    255 * Math.pow(Math.pow(from / 255, GAMMA) * (1 - t) + Math.pow(to / 255, GAMMA) * t, 1 / GAMMA),
-  );
+  return Math.round(from + (to - from) * t);
 }
 
 const lutCache = new Map<string, Uint8Array>();
@@ -43,7 +52,10 @@ function inkLut(inkHex: string): Uint8Array {
     if (lum >= WHITE_CLAMP) {
       lut[v * 3] = lut[v * 3 + 1] = lut[v * 3 + 2] = 255;
     } else {
-      const t = 1 - lum / WHITE_CLAMP;
+      const t =
+        lum <= BLACK_CLAMP
+          ? 1
+          : Math.pow((WHITE_CLAMP - lum) / (WHITE_CLAMP - BLACK_CLAMP), CONTRAST);
       lut[v * 3] = mix(255, ink.r, t);
       lut[v * 3 + 1] = mix(255, ink.g, t);
       lut[v * 3 + 2] = mix(255, ink.b, t);

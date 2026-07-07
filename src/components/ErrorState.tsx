@@ -17,7 +17,9 @@ export function ErrorState({ kind, onFile, onChoose, onRetry }: Props) {
           {kind === 'unsupported' ? (
             <>
               <div className="error-title">This file type isn't supported yet.</div>
-              <div className="error-body">PrintAnything works with PDF, PNG, and JPG.</div>
+              <div className="error-body">
+                PrintAnything works with PDF, PNG, JPG, and HEIC (iPhone photos).
+              </div>
               <div className="error-actions">
                 <button className="btn-primary" onClick={onChoose}>
                   Choose a different file

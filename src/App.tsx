@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { Header } from './components/Header';
 import { EmptyState } from './components/EmptyState';
 import { ProcessingState } from './components/ProcessingState';
@@ -32,6 +32,7 @@ export default function App() {
   const [showPrintReminder, setShowPrintReminder] = useState(false);
   const [printImages, setPrintImages] = useState<string[]>([]);
   const [busy, setBusy] = useState<'print' | 'download' | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [, setPagesVersion] = useState(0);
 
   const storeRef = useRef(new PageStore());
@@ -41,6 +42,51 @@ export default function App() {
   const lastFile = useRef<File | null>(null);
   const idleHandle = useRef<number | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const handleFileRef = useRef<(file: File) => void>(() => {});
+  handleFileRef.current = (file) => void handleFile(file);
+
+  // Window-level drag-and-drop: dropping a file anywhere, in any state,
+  // replaces the loaded document without confirmation. The depth counter
+  // keeps the overlay from flickering as the drag crosses child elements.
+  useEffect(() => {
+    const depth = { current: 0 };
+    const isFileDrag = (e: globalThis.DragEvent) =>
+      Array.from(e.dataTransfer?.types ?? []).includes('Files');
+    const onDragEnter = (e: globalThis.DragEvent) => {
+      if (!isFileDrag(e)) return;
+      depth.current++;
+      setDragging(true);
+    };
+    const onDragLeave = (e: globalThis.DragEvent) => {
+      if (!isFileDrag(e)) return;
+      depth.current = Math.max(0, depth.current - 1);
+      if (depth.current === 0) setDragging(false);
+    };
+    const onDragOver = (e: globalThis.DragEvent) => {
+      if (isFileDrag(e)) e.preventDefault();
+    };
+    const onDrop = (e: globalThis.DragEvent) => {
+      depth.current = 0;
+      setDragging(false);
+      if (!isFileDrag(e)) return;
+      // The empty/error DropZone handles its own drops (and prevents default);
+      // don't process the same file twice.
+      if (e.defaultPrevented) return;
+      e.preventDefault();
+      const file = e.dataTransfer?.files?.[0];
+      if (file) handleFileRef.current(file);
+    };
+    window.addEventListener('dragenter', onDragEnter);
+    window.addEventListener('dragleave', onDragLeave);
+    window.addEventListener('dragover', onDragOver);
+    window.addEventListener('drop', onDrop);
+    return () => {
+      window.removeEventListener('dragenter', onDragEnter);
+      window.removeEventListener('dragleave', onDragLeave);
+      window.removeEventListener('dragover', onDragOver);
+      window.removeEventListener('drop', onDrop);
+    };
+  }, []);
 
   function openPicker() {
     fileInput.current?.click();
@@ -167,7 +213,7 @@ export default function App() {
   return (
     <div
       className={'app' + (printImages.length > 0 ? ' has-print-pages' : '')}
-      style={{ '--ink': inkHex } as CSSProperties}
+      style={{ '--ink': INKS[0].hex } as CSSProperties}
     >
       <div className="no-print">
         <Header />
@@ -185,6 +231,7 @@ export default function App() {
             onPageChange={goToPage}
             inkIndex={inkIndex}
             onSelectInk={selectInk}
+            onChooseFile={openPicker}
             sourceCanvas={sourceCanvas}
             recoloredCanvas={recoloredCanvas}
             holding={holding}
@@ -204,11 +251,21 @@ export default function App() {
             onRetry={handleRetry}
           />
         )}
+        {dragging && appState !== 'empty' && (
+          <div className="drag-overlay">
+            <div className="drag-overlay-frame" aria-hidden="true" />
+            <div className="drag-overlay-headline">Drop to replace {fileName}</div>
+            <div className="drag-overlay-subline">
+              The new file gets re-inked right away — your current file stays safe on your
+              device.
+            </div>
+          </div>
+        )}
       </div>
       <input
         ref={fileInput}
         type="file"
-        accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+        accept=".pdf,.png,.jpg,.jpeg,.heic,.heif,application/pdf,image/png,image/jpeg,image/heic,image/heif"
         style={{ display: 'none' }}
         onChange={onInputChange}
       />

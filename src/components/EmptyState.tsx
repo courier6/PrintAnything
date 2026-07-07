@@ -18,7 +18,7 @@ export function EmptyState({ onFile, onChoose }: Props) {
           <button className="btn-primary" onClick={onChoose}>
             Choose a file
           </button>
-          <span className="hero-formats">PDF, PNG, or JPG</span>
+          <span className="hero-formats">PDF, PNG, JPG, or HEIC</span>
         </div>
       </DropZone>
       <div className="below-zone">

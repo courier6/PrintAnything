@@ -1,4 +1,4 @@
-import type { KeyboardEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { INKS } from '../lib/inks';
 import { PageCanvas } from './PageCanvas';
 import { PrintReminder } from './PrintReminder';
@@ -10,6 +10,7 @@ interface Props {
   onPageChange: (page: number) => void;
   inkIndex: number;
   onSelectInk: (index: number) => void;
+  onChooseFile: () => void;
   sourceCanvas: HTMLCanvasElement | null;
   recoloredCanvas: HTMLCanvasElement | null;
   holding: boolean;
@@ -28,6 +29,7 @@ export function PreviewState({
   onPageChange,
   inkIndex,
   onSelectInk,
+  onChooseFile,
   sourceCanvas,
   recoloredCanvas,
   holding,
@@ -39,6 +41,41 @@ export function PreviewState({
   onDismissReminder,
 }: Props) {
   const pageReady = recoloredCanvas !== null;
+  const inkHex = INKS[inkIndex].hex;
+
+  // Transient confirmation after a swatch click; flashKey restarts the
+  // glow animation even when clicks come in quick succession.
+  const [justInked, setJustInked] = useState(false);
+  const [flashKey, setFlashKey] = useState(0);
+  const inkTimer = useRef<number | null>(null);
+  const prevInk = useRef(inkIndex);
+
+  // Delayed nudge toward Download PDF: starts after the page flash and
+  // caption have settled so it reads as a second, quieter cue.
+  const [downloadHint, setDownloadHint] = useState(false);
+  const hintTimers = useRef<number[]>([]);
+
+  useEffect(() => {
+    if (prevInk.current === inkIndex) return;
+    prevInk.current = inkIndex;
+    setFlashKey((k) => k + 1);
+    setJustInked(true);
+    if (inkTimer.current !== null) window.clearTimeout(inkTimer.current);
+    inkTimer.current = window.setTimeout(() => setJustInked(false), 2000);
+    setDownloadHint(false);
+    hintTimers.current.forEach((t) => window.clearTimeout(t));
+    hintTimers.current = [
+      window.setTimeout(() => setDownloadHint(true), 1600),
+      window.setTimeout(() => setDownloadHint(false), 1600 + 3600),
+    ];
+  }, [inkIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (inkTimer.current !== null) window.clearTimeout(inkTimer.current);
+      hintTimers.current.forEach((t) => window.clearTimeout(t));
+    };
+  }, []);
 
   function holdKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
     if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) {
@@ -54,9 +91,14 @@ export function PreviewState({
   return (
     <>
       <div className="toolbar">
-        <span className="file-chip">
-          {fileName} · {pageCount} {pageCount === 1 ? 'page' : 'pages'}
-        </span>
+        <div className="toolbar-file">
+          <span className="file-chip">
+            {fileName} · {pageCount} {pageCount === 1 ? 'page' : 'pages'}
+          </span>
+          <button className="btn-text" onClick={onChooseFile}>
+            Choose a different file
+          </button>
+        </div>
         <div className="pager">
           <button
             className="pager-btn"
@@ -79,7 +121,14 @@ export function PreviewState({
           </button>
         </div>
         <div className="toolbar-actions">
-          <button className="btn-secondary" onClick={onDownload} disabled={busy !== null}>
+          <button
+            className={
+              'btn-secondary' +
+              (downloadHint && pageReady && busy === null ? ' btn-shimmer' : '')
+            }
+            onClick={onDownload}
+            disabled={busy !== null}
+          >
             {busy === 'download' ? 'Preparing…' : 'Download PDF'}
           </button>
           <button className="btn-primary toolbar-print" onClick={onPrint} disabled={busy !== null}>
@@ -91,8 +140,16 @@ export function PreviewState({
       <div className="preview-grid">
         <div className="preview-stage">
           {showReminder && <PrintReminder onDismiss={onDismissReminder} />}
-          <span className="compare-caption">
-            {holding ? 'Original — black ink' : 'Re-inked preview — what will print'}
+          <span
+            className="compare-caption"
+            aria-live="polite"
+            style={justInked && !holding ? { color: inkHex } : undefined}
+          >
+            {holding
+              ? 'Original — black ink'
+              : justInked
+                ? `✓ Re-inked in ${INKS[inkIndex].name} — ready to print or download`
+                : 'Re-inked preview — what will print'}
           </span>
           {pageReady ? (
             <div className="page-stack">
@@ -101,6 +158,9 @@ export function PreviewState({
                 canvas={sourceCanvas}
                 className={'page-layer page-original' + (holding ? ' visible' : '')}
               />
+              {flashKey > 0 && (
+                <div key={flashKey} className="page-flash" style={{ color: inkHex }} />
+              )}
             </div>
           ) : (
             <div className="page-placeholder">Recoloring this page…</div>
@@ -146,7 +206,6 @@ export function PreviewState({
                   onClick={() => onSelectInk(i)}
                 />
               ))}
-              <div className="swatch-placeholder" title="More colors in v2" aria-hidden="true" />
             </div>
             <div className="ink-name">{INKS[inkIndex].name}</div>
           </div>

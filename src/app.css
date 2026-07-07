@@ -1,6 +1,8 @@
 /* PrintAnything — full-duotone UI (design option 1a).
-   Every tint derives from the single --ink custom property set on .app;
-   switching the swatch re-inks the entire interface in one paint. */
+   Every tint derives from the single --ink custom property set on .app.
+   The UI stays pinned to the default navy; the selected swatch only
+   recolors the uploaded document, so the chrome never misleads about
+   what will actually print. */
 
 :root {
   color-scheme: light;
@@ -50,6 +52,7 @@ button {
 }
 
 .no-print {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -141,6 +144,40 @@ button {
 .btn-secondary:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+/* Gentle sheen sweep nudging toward Download PDF a moment after an ink
+   change; two passes, then still. */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(0, 0, 0, 0.08) 50%,
+    transparent 75%
+  );
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    color-mix(in srgb, var(--ink) 16%, transparent) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  animation: btn-shimmer 1.8s ease-in-out 2;
+}
+
+@keyframes btn-shimmer {
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .btn-outline-small {
@@ -328,6 +365,28 @@ button {
   flex-wrap: wrap;
 }
 
+.toolbar-file {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Quiet text button — same phrase as the error state's primary action:
+   one wording for one action app-wide. */
+.btn-text {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 .file-chip {
   font-size: 13px;
   color: var(--ink-60);
@@ -422,6 +481,28 @@ button {
   opacity: 1;
 }
 
+/* One-shot glow in the newly selected ink; remounted per swatch click
+   (keyed element) so the animation restarts on rapid selections. */
+.page-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 3px currentColor,
+    0 0 28px 8px currentColor;
+  opacity: 0;
+  animation: page-flash 600ms ease-out;
+}
+
+@keyframes page-flash {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .page-placeholder {
   width: 380px;
   max-width: 100%;
@@ -485,14 +566,6 @@ button {
   border: none;
   padding: 0;
   cursor: pointer;
-  flex: none;
-}
-
-.swatch-placeholder {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(0, 0, 0, 0.25);
   flex: none;
 }
 
@@ -574,6 +647,45 @@ button {
   display: none;
 }
 
+/* ---------- Drag-over replace overlay ---------- */
+
+/* Full-surface message while a file is dragged over the window in
+   Processing / Preview / Error. No confirmation dialog — this IS the
+   warning; replacement is non-destructive. */
+.drag-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 26px;
+}
+
+.drag-overlay-frame {
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed var(--ink);
+  pointer-events: none;
+}
+
+.drag-overlay-headline {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.drag-overlay-subline {
+  font-size: 14px;
+  color: var(--ink-65);
+}
+
 @media print {
   .app.has-print-pages .no-print {
     display: none !important;
@@ -596,6 +708,14 @@ button {
   .page-original,
   .progress-fill {
     transition: none;
+  }
+
+  .page-flash {
+    animation: none;
+  }
+
+  .btn-shimmer::after {
+    content: none;
   }
 }
 
