@@ -16,7 +16,9 @@ export async function exportRecoloredPdf(
     page.drawImage(image, { x: 0, y: 0, width: PAGE_WIDTH_PT, height });
   }
   const pdfBytes = await doc.save();
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  // Copy into a fresh ArrayBuffer-backed view: pdf-lib types its output as
+  // Uint8Array<ArrayBufferLike>, which BlobPart no longer accepts.
+  const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
