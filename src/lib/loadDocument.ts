@@ -40,9 +40,8 @@ export async function loadDocument(file: File): Promise<SourceDocument> {
 // Browsers (Safari aside) can't decode HEIC natively; the decoder is imported
 // only when a HEIC file actually arrives so the common path stays light.
 async function decodeHeic(file: File): Promise<Blob> {
-  const heic2any = (await import('heic2any')).default;
-  const result = await heic2any({ blob: file, toType: 'image/png' });
-  return Array.isArray(result) ? result[0] : result;
+  const { heicTo } = await import('heic-to');
+  return heicTo({ blob: file, type: 'image/png' });
 }
 
 async function loadPdf(file: File): Promise<SourceDocument> {

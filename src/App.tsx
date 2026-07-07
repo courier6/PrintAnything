@@ -128,6 +128,7 @@ export default function App() {
       }
     } catch (err) {
       if (token !== runToken.current) return;
+      console.error(err);
       setErrorKind(err instanceof UnsupportedFileError ? 'unsupported' : 'processing');
       setAppState('error');
     }
