@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://courier6.github.io/PrintAnything/sitemap.xml
