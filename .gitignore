@@ -6,3 +6,11 @@ dist
 # Local design/test assets, not part of the app
 PrintAnything black ink solution-new.zip
 TAPEVARIANTS-reinked.pdf
+
+# Internal working docs (kept local, not published)
+CLAUDE-DESIGN-HANDOFF.md
+V2-ARCHITECTURE.md
+printanything-design-brief.md
+printanything-design-brief-v2.md
+design_handoff_printanything-new/
+.claude/
