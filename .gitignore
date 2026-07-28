@@ -2,3 +2,7 @@ node_modules
 dist
 *.local
 .DS_Store
+
+# Local design/test assets, not part of the app
+PrintAnything black ink solution-new.zip
+TAPEVARIANTS-reinked.pdf

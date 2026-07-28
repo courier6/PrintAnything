@@ -1,3 +1,5 @@
+import { HeicDecodeError, ImageDecodeError, UnsupportedFileError } from './errors';
+
 // pdfjs is loaded on demand so the landing screen doesn't pay for it.
 async function getPdfjs() {
   const [pdfjsLib, worker] = await Promise.all([
@@ -11,13 +13,6 @@ async function getPdfjs() {
 // ~150 DPI: readable in print, fast enough for per-pixel recoloring.
 const RENDER_DPI = 150;
 const MAX_IMAGE_DIM = 3500;
-
-export class UnsupportedFileError extends Error {
-  constructor() {
-    super('Unsupported file type');
-    this.name = 'UnsupportedFileError';
-  }
-}
 
 export interface SourceDocument {
   pageCount: number;
@@ -40,8 +35,12 @@ export async function loadDocument(file: File): Promise<SourceDocument> {
 // Browsers (Safari aside) can't decode HEIC natively; the decoder is imported
 // only when a HEIC file actually arrives so the common path stays light.
 async function decodeHeic(file: File): Promise<Blob> {
-  const { heicTo } = await import('heic-to');
-  return heicTo({ blob: file, type: 'image/png' });
+  try {
+    const { heicTo } = await import('heic-to');
+    return await heicTo({ blob: file, type: 'image/png' });
+  } catch (err) {
+    throw new HeicDecodeError(err instanceof Error ? err.message : String(err));
+  }
 }
 
 async function loadPdf(file: File): Promise<SourceDocument> {
@@ -68,7 +67,12 @@ async function loadPdf(file: File): Promise<SourceDocument> {
 }
 
 async function loadImage(file: Blob): Promise<SourceDocument> {
-  const bitmap = await createImageBitmap(file);
+  let bitmap: ImageBitmap;
+  try {
+    bitmap = await createImageBitmap(file);
+  } catch (err) {
+    throw new ImageDecodeError(err instanceof Error ? err.message : String(err));
+  }
   const scale = Math.min(1, MAX_IMAGE_DIM / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement('canvas');
   canvas.width = Math.round(bitmap.width * scale);

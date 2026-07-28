@@ -5,11 +5,22 @@ import { ProcessingState } from './components/ProcessingState';
 import { PreviewState } from './components/PreviewState';
 import { ErrorState, type ErrorKind } from './components/ErrorState';
 import { INKS } from './lib/inks';
-import { loadDocument, UnsupportedFileError } from './lib/loadDocument';
+import { loadDocument } from './lib/loadDocument';
+import { classifyError, logAppError, type ErrorCode } from './lib/errors';
 import { PageStore } from './lib/pageStore';
 import { exportRecoloredPdf } from './lib/exportPdf';
 
 type AppState = 'empty' | 'processing' | 'preview' | 'error';
+
+const KIND_BY_CODE: Record<ErrorCode, ErrorKind> = {
+  'PA-100': 'processing',
+  'PA-101': 'unsupported',
+  'PA-102': 'password',
+  'PA-103': 'damaged-pdf',
+  'PA-104': 'heic',
+  'PA-105': 'image',
+  'PA-106': 'memory',
+};
 
 const scheduleIdle: (cb: () => void) => number =
   typeof window.requestIdleCallback === 'function'
@@ -22,7 +33,10 @@ const cancelIdle: (handle: number) => void =
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>('empty');
-  const [errorKind, setErrorKind] = useState<ErrorKind>('unsupported');
+  const [errorInfo, setErrorInfo] = useState<{ code: ErrorCode; kind: ErrorKind }>({
+    code: 'PA-100',
+    kind: 'processing',
+  });
   const [inkIndex, setInkIndex] = useState(0);
   const [fileName, setFileName] = useState('');
   const [pageCount, setPageCount] = useState(0);
@@ -128,8 +142,9 @@ export default function App() {
       }
     } catch (err) {
       if (token !== runToken.current) return;
-      console.error(err);
-      setErrorKind(err instanceof UnsupportedFileError ? 'unsupported' : 'processing');
+      const code = classifyError(err);
+      logAppError(code, err, lastFile.current);
+      setErrorInfo({ code, kind: KIND_BY_CODE[code] });
       setAppState('error');
     }
   }
@@ -246,7 +261,8 @@ export default function App() {
         )}
         {appState === 'error' && (
           <ErrorState
-            kind={errorKind}
+            kind={errorInfo.kind}
+            code={errorInfo.code}
             onFile={(f) => void handleFile(f)}
             onChoose={openPicker}
             onRetry={handleRetry}

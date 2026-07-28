@@ -296,6 +296,12 @@ button {
   padding: 11px 20px;
 }
 
+.error-code {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-40);
+}
+
 /* ---------- Processing ---------- */
 
 .processing-area {
